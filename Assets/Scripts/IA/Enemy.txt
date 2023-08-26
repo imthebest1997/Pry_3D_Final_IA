@@ -1,0 +1,7 @@
+tree "Root"
+    fallback
+        sequence
+            VerificarJugadorEnAreaAtaque
+            IrAtacarJugador
+        sequence                       
+            CaminarArea            

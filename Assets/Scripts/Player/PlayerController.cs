@@ -104,4 +104,13 @@ public class PlayerController : MonoBehaviour
         moveDirection.y = knockBackPower.y;
         characterController.Move(moveDirection * Time.deltaTime);
     }
+
+/*    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.collider.CompareTag("Enemy"))
+        {
+            Debug.Log("Colisione con el player");
+        }
+    }
+*/
 }
