@@ -32,6 +32,9 @@ public class PlayerController : MonoBehaviour
 
     public bool stopMove;
 
+    //Collider Punch
+    [SerializeField] BoxCollider punchCollider;
+
     private void Awake()
     {
         instance = this;
@@ -60,6 +63,20 @@ public class PlayerController : MonoBehaviour
 
             characterController.Move(speed * Time.deltaTime * moveDirection);
 
+            //Ataque
+            if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.I))
+            {
+                punchCollider.enabled = true;
+                animator.SetTrigger("IsAttacking");
+            }
+
+            if (Input.GetMouseButtonUp(0) || Input.GetKeyDown(KeyCode.I))
+            {
+                punchCollider.enabled = false;
+            }
+
+
+
             //Rotar al jugador cuando hay movimiento
             if (x != 0 || z != 0)
             {
@@ -71,6 +88,7 @@ public class PlayerController : MonoBehaviour
             velocity.y += gravity * Time.deltaTime;//Gravedad
 
             characterController.Move(velocity * Time.deltaTime);
+        
         }else if (isKnocking)
         {
             knockBackCounter -= Time.deltaTime;
@@ -105,12 +123,11 @@ public class PlayerController : MonoBehaviour
         characterController.Move(moveDirection * Time.deltaTime);
     }
 
-/*    private void OnControllerColliderHit(ControllerColliderHit hit)
+    IEnumerator DelayedAction()
     {
-        if (hit.collider.CompareTag("Enemy"))
-        {
-            Debug.Log("Colisione con el player");
-        }
+        Debug.Log("Esperando...");
+        yield return new WaitForSeconds(2f); // Espera durante 2 segundos
+        Debug.Log("Han pasado 2 segundos.");
+        // Aquí puedes poner la siguiente línea de código que deseas ejecutar después de la espera.
     }
-*/
 }

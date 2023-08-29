@@ -2,6 +2,8 @@ tree "Root"
     fallback
         sequence
             VerificarJugadorEnAreaAtaque
-            IrAtacarJugador
-        sequence                       
+            DispararLaser
+            IrTrasJugador
+        sequence           
+            DejarDeDisparar
             CaminarArea            

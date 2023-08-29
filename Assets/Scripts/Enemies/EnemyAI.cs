@@ -30,19 +30,24 @@ public class EnemyAI : MonoBehaviour
         jugadorDentroArea = JugadorDentroArea();
         if (jugadorDentroArea)
         {
-            EnemyShot.instance.playerFound = true;
             Task.current.Succeed();
         }
         else
         {
-            EnemyShot.instance.playerFound = false;
             UpdateDestination();
             Task.current.Fail();
         }
     }
 
     [Task]
-    private void IrAtacarJugador()
+    private void DispararLaser()
+    {
+        EnemyShot.instance.playerFound = true;
+        Task.current.Succeed();
+    }
+
+    [Task]
+    private void IrTrasJugador()
     {
         if(colisionCon == 1)
         {
@@ -53,10 +58,12 @@ public class EnemyAI : MonoBehaviour
     }
 
     [Task]
-    private void AtacarJugador()
+    private void DejarDeDisparar()
     {
+        EnemyShot.instance.playerFound = false;
         Task.current.Succeed();
     }
+
 
     [Task]
     private void CaminarArea()
